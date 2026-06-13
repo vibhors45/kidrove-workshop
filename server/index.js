@@ -6,6 +6,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -126,9 +127,11 @@ app.post('/api/enquiry', async (req, res) => {
   }
 });
 
-// 404 handler
-app.use((_req, res) => {
-  res.status(404).json({ success: false, message: 'Route not found' });
+// ─── Serve React Frontend ─────────────────────────────────────────────────────
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 // ─── Start ────────────────────────────────────────────────────────────────────
