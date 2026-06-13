@@ -12,10 +12,7 @@ const PORT = process.env.PORT || 4000;
 
 // ─── Middleware ────────────────────────────────────────────────────────────────
 app.use(express.json());
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
-  methods: ['GET', 'POST'],
-}));
+app.use(cors());
 
 // ─── Optional MongoDB Setup ───────────────────────────────────────────────────
 let Enquiry = null;
